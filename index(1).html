@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>在线服务｜添加微信</title>
+  <meta name="description" content="添加微信获取一对一服务" />
+  <style>
+    :root{
+      --bg:#080807;
+      --card:#12110f;
+      --card2:#1b1711;
+      --gold:#d7aa55;
+      --gold2:#f1d18a;
+      --text:#fff8e8;
+      --muted:#b9aa8f;
+      --line:rgba(215,170,85,.25);
+      --shadow:0 24px 70px rgba(0,0,0,.48);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(215,170,85,.26), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(255,219,143,.14), transparent 36%),
+        linear-gradient(135deg,#050504,#14100b 56%,#070605);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px 16px;
+    }
+    .wrap{width:min(560px,100%)}
+    .top{
+      text-align:center;
+      letter-spacing:.12em;
+      color:var(--gold2);
+      font-weight:700;
+      margin-bottom:18px;
+      font-size:14px;
+    }
+    .card{
+      position:relative;
+      overflow:hidden;
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015)), var(--card);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:34px 24px 24px;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:linear-gradient(115deg,transparent 0 22%,rgba(241,209,138,.18) 38%,transparent 54%);
+      pointer-events:none;
+    }
+    .badge{
+      position:relative;
+      width:78px;height:78px;
+      margin:0 auto 20px;
+      border-radius:24px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(145deg,#2b2113,#0b0a08);
+      border:1px solid var(--line);
+      box-shadow:inset 0 0 22px rgba(215,170,85,.12);
+      color:var(--gold2);
+      font-size:34px;
+      font-weight:900;
+    }
+    h1{
+      position:relative;
+      margin:0;
+      text-align:center;
+      font-size:34px;
+      line-height:1.18;
+      letter-spacing:-.03em;
+    }
+    .sub{
+      position:relative;
+      margin:14px auto 24px;
+      max-width:410px;
+      text-align:center;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+    .wechat-box{
+      position:relative;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg,rgba(215,170,85,.14),rgba(255,255,255,.03));
+      padding:18px;
+      text-align:center;
+      margin:18px 0;
+    }
+    .label{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .wechat-id{
+      font-size:32px;
+      line-height:1.1;
+      font-weight:900;
+      color:var(--gold2);
+      letter-spacing:.04em;
+      word-break:break-all;
+    }
+    .btn{
+      position:relative;
+      width:100%;
+      border:0;
+      margin-top:16px;
+      border-radius:18px;
+      padding:17px 18px;
+      font-size:17px;
+      font-weight:800;
+      color:#1a1205;
+      background:linear-gradient(135deg,#f5d88f,#c88b2f);
+      cursor:pointer;
+      box-shadow:0 14px 28px rgba(200,139,47,.22);
+    }
+    .btn:active{transform:translateY(1px)}
+    .tips{
+      margin:12px 0 0;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .features{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:22px;
+    }
+    .feature{
+      border:1px solid rgba(215,170,85,.18);
+      background:rgba(255,255,255,.035);
+      border-radius:16px;
+      padding:12px 8px;
+      text-align:center;
+      color:var(--gold2);
+      font-size:13px;
+      font-weight:700;
+    }
+    .feature span{display:block;color:var(--muted);font-weight:600;font-size:11px;margin-bottom:3px}
+    .footer{
+      text-align:center;
+      margin-top:18px;
+      color:rgba(255,248,232,.58);
+      font-size:12px;
+    }
+    .toast{
+      position:fixed;
+      left:50%;bottom:34px;
+      transform:translateX(-50%) translateY(20px);
+      opacity:0;
+      color:#171007;
+      background:var(--gold2);
+      padding:12px 16px;
+      border-radius:999px;
+      font-size:14px;
+      font-weight:800;
+      box-shadow:0 16px 42px rgba(0,0,0,.35);
+      transition:.24s ease;
+      pointer-events:none;
+      white-space:nowrap;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    @media (max-width:420px){
+      .card{padding:28px 18px 20px;border-radius:24px}
+      h1{font-size:30px}
+      .wechat-id{font-size:28px}
+      .features{gap:8px}
+      .feature{font-size:12px;padding:10px 4px}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top">ONLINE SERVICE · 专属服务通道</div>
+    <section class="card">
+      <div class="badge">微</div>
+      <h1>有问题，<br>微信上直接聊。</h1>
+      <p class="sub">添加我的微信，发送您的订单或问题，我会为您提供一对一协助。</p>
+
+      <div class="wechat-box">
+        <div class="label">我的微信号 / 本人微信</div>
+        <div id="wechatId" class="wechat-id">1254126863</div>
+      </div>
+
+      <button class="btn" id="openWechatBtn">复制微信号并打开微信</button>
+      <p class="tips">点击后会自动复制微信号；进入微信后粘贴搜索即可。</p>
+
+      <div class="features">
+        <div class="feature"><span>01</span>本人对接</div>
+        <div class="feature"><span>02</span>一对一服务</div>
+        <div class="feature"><span>03</span>售后无忧</div>
+      </div>
+    </section>
+    <div class="footer">© ONLINE SERVICE · 对话 · 信任 · 连接 · 服务</div>
+  </main>
+
+  <div id="toast" class="toast">微信号已复制，正在尝试打开微信…</div>
+
+  <script>
+    // ====== 只需要改这里 ======
+    const WECHAT_ID = "1254126863";
+    // =========================
+
+    const idEl = document.getElementById("wechatId");
+    const btn = document.getElementById("openWechatBtn");
+    const toast = document.getElementById("toast");
+    idEl.textContent = WECHAT_ID;
+
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2300);
+    }
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch(e){
+        const input = document.createElement("textarea");
+        input.value = text;
+        input.style.position = "fixed";
+        input.style.left = "-9999px";
+        document.body.appendChild(input);
+        input.focus();
+        input.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(input);
+        return ok;
+      }
+    }
+
+    btn.addEventListener("click", async () => {
+      const ok = await copyText(WECHAT_ID);
+      showToast(ok ? "微信号已复制，正在尝试打开微信…" : "请手动复制微信号");
+      setTimeout(() => {
+        // 手机端通常会尝试拉起微信；电脑端可能会被浏览器拦截，这是正常现象。
+        window.location.href = "weixin://";
+      }, 350);
+    });
+  </script>
+</body>
+</html>
